@@ -31,4 +31,16 @@ public class ReaderTest {
 
         assertEquals(lines, linesExpected);
     }
+
+    @Test
+    public void testGetString() {
+
+        Reader reader = new Reader();
+
+        String fileName = "testFiles/testRead1.txt";
+        String txt = reader.getString(fileName);
+        String txtEpected = "first\ntext\ndocument";
+
+        assertEquals(txtEpected, txt);
+    }
 }
