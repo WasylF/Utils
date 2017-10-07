@@ -1,6 +1,7 @@
 package com.github.wslf.utils.web;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -31,9 +32,9 @@ public class WebReader {
      *
      * @param urlString URL
      * @return single string that contains whole plain text from the page
-     * @throws Exception if couldn't read page
+     * @throws IOException if couldn't read page
      */
-    public String read(final String urlString) throws Exception {
+    public String read(final String urlString) throws IOException {
         try {
             final URL url = new URL(urlString);
             HttpURLConnection huc = (HttpURLConnection) url.openConnection();
@@ -54,7 +55,7 @@ public class WebReader {
                 }
             }
             return text.toString();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             System.err.println("Failed to read url: " + urlString
                     + "\n" + ex.getMessage());
             throw ex;
@@ -66,16 +67,16 @@ public class WebReader {
      *
      * @param urlString URL
      * @return response code
-     * @throws Exception if couldn't read page
+     * @throws IOException if couldn't read page
      */
-    public int getResponseCode(final String urlString) throws Exception {
+    public int getResponseCode(final String urlString) throws IOException {
         try {
             final URL url = new URL(urlString);
             HttpURLConnection huc = (HttpURLConnection) url.openConnection();
             huc.setRequestMethod("HEAD");
             huc.getResponseMessage();
             return huc.getResponseCode();
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             System.err.println("Failed to get response code of url: " + urlString
                     + "\n" + ex.getMessage());
             throw ex;
@@ -86,9 +87,9 @@ public class WebReader {
      * Check page existence
      *
      * @param urlString URL
-     * @return
+     * @return existence of URL
      */
-    public boolean isExists(final String urlString) throws Exception {
+    public boolean isExists(final String urlString) {
         try {
             HttpURLConnection.setFollowRedirects(false);
             HttpURLConnection con

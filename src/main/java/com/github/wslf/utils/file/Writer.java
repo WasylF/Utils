@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Writer class is class for simplifying writing to text files.
@@ -49,4 +50,18 @@ public class Writer {
     public boolean write(ArrayList<String> lines, String fileName) {
         return write(lines, fileName, "\r\n");
     }
+
+    /**
+     * Writes list of the lines to the text file.
+     *
+     * @param text lines to be written
+     * @param fileName absolute or relative path to the text file to be
+     * overwritten or created
+     *
+     * @return successfulness of writing to the file
+     */
+    public boolean write(String text, String fileName) {
+        return write(new ArrayList<>(Arrays.asList(text)), fileName);
+    }
+
 }
